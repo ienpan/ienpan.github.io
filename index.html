@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>作业不会抄</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0f0f17;
+      --text: #e0e0ff;
+      --accent: #00d4ff;
+      --card: rgba(30, 30, 60, 0.4);
+      --glass: rgba(255,255,255,0.07);
+      --border: rgba(0, 212, 255, 0.18);
+    }
+    
+    [data-theme="light"] {
+      --bg: #f8f9ff;
+      --text: #1a1a3d;
+      --accent: #0066cc;
+      --card: rgba(255,255,255,0.75);
+      --glass: rgba(255,255,255,0.65);
+      --border: rgba(0,102,204,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    header {
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0a0a1f 0%, #1a0033 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(0,212,255,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      max-width: 600px;
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-12px); }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    section {
+      margin-bottom: 8rem;
+    }
+
+    .glass-card {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 20px 60px rgba(0,212,255,0.15);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-tag {
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+    }
+
+    .contact-links a {
+      display: inline-block;
+      margin: 0.8rem 1.2rem 0 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .contact-links a:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 12px var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 5.5rem; }
+      .glass-card { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="theme-toggle" onclick="document.documentElement.dataset.theme = 
+    document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'">
+    切换日/夜
+  </button>
+
+  <header>
+    <h1>尘间拾清韵</h1>
+    <p class="tagline">作业不会抄 的码农 / 深夜思考者 / 偶尔写点代码和人生</p>
+    
+    <div class="scroll-hint">↓ 向下滚动 看看我都干了些什么</div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="glass-card">
+        <h2>关于我</h2>
+        <p>
+          坐标九头鸟东方，日常写 Python / C++ / 网络运维相关的东西。<br>
+          喜欢把复杂问题拆成零碎小块，然后用最优雅的方式解决。<br>
+          也喜欢凌晨三点的霓虹灯和无人问津的哲学问题。
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="glass-card">
+        <h2>作业不会抄（2026 版）</h2>
+        <div class="skills">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++20/23</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">网络工程（CCNA/CCNP）</span>
+          <span class="skill-tag">数据分析 & 可视化</span>
+          <span class="skill-tag">HTML/CSS (现代写法)</span>
+          <span class="skill-tag">Git & Markdown</span>
+          <span class="skill-tag">熬夜写代码</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="glass-card">
+        <h2>近期项目 / 兴趣</h2>
+        <ul style="padding-left:1.8rem; margin-top:1rem; opacity:0.9;">
+          <li>人生重开模拟器</li>
+          <li>路由器群控知识</li>
+          <li>个人网页实验场</li>
+          <li>深夜刷直播短视频</li>
+          <li>收集不会抄的作业</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="glass-card">
+        <h2>联系我</h2>
+        <p style="margin:1.5rem 0;">想聊代码、职业规划、不会抄的作业，或者单纯吐槽生活，都欢迎～</p>
+        <div class="contact-links">
+         
+          <a href="https://github.com/ienpan" target="_blank">GitHub</a>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 作业不会抄 • Built with pure HTML + CSS • Las Vegas, NV
+  </footer>
+
+</body>
+</html>
